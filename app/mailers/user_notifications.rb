@@ -42,8 +42,8 @@ class UserNotifications < ActionMailer::Base
 
     @last_seen_at = I18n.l(@user.last_seen_at || @user.created_at, format: :short)
 
-    # A list of new topics to show the user
-    @new_topics = Topic.new_topics(min_date)
+    # A list of topics to show the user
+    @new_topics = Topic.for_digest(user, min_date)
     @notifications = @user.notifications.interesting_after(min_date)
 
     @markdown_linker = MarkdownLinker.new(Discourse.base_url)

@@ -6,6 +6,8 @@
 #
 # It also adds an HTML part for the plain text body using markdown
 #
+require_dependency 'email_styles'
+
 class EmailSender
 
   def initialize(message, email_type, user=nil)
@@ -22,9 +24,15 @@ class EmailSender
     @message.charset = 'UTF-8'
     plain_body = @message.body.to_s.force_encoding('UTF-8')
 
+    formatted_body = EmailStyles.new(PrettyText.cook(plain_body, environment: 'email')).format
+
     @message.html_part = Mail::Part.new do
       content_type 'text/html; charset=UTF-8'
-      body PrettyText.cook(plain_body, environment: 'email')
+
+      body ActionView::Base.new(Rails.configuration.paths["app/views"]).render(
+        :template => 'email/template', :format => :html,
+        :locals => { :html_body => formatted_body }
+      )
     end
 
     @message.text_part.content_type = 'text/plain; charset=UTF-8'
