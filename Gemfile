@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "2.0.0"
+
 gem 'active_model_serializers', git: 'https://github.com/rails-api/active_model_serializers.git'
 
 # we had issues with latest, stick to the rev till we figure this out
@@ -61,6 +63,7 @@ gem 'sass'
 gem 'seed-fu'
 gem 'sidekiq'
 gem 'sidekiq-failures'
+gem 'autoscaler', require: false
 gem 'sinatra', require: nil
 gem 'slim'  # required for sidekiq-web
 gem 'strong_parameters' # remove when we upgrade to Rails 4
