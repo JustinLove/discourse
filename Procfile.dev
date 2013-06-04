@@ -1,0 +1,2 @@
+postgres: postgres -D db/postgres -d 1
+#redis: redis-server db/redis/dev.conf

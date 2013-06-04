@@ -20,7 +20,7 @@ dump.rdb
 /cache
 /coverage/*
 
-/public/assets/*
+#/public/assets/*
 
 config/database.yml
 config/redis.yml
@@ -31,6 +31,7 @@ config/discourse.pill
 /dbs/*.sql
 /dbs/*.sql.gz
 /db/structure.sql
+/db/postgres
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
